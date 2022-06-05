@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Contacts from "./src/pages/Contacts/Contacts";
+import Informations from "./src/pages/Informations/Informations";
+import AppContacts from "./src/pages/AppContacts";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function Tabs() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator tabBarShowLabel={false}>
+      <Tab.Screen name="AppContact" component={AppContacts} />
+      <Tab.Screen name="Contact" component={Contacts} />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="AppContact"
+          component={Tabs}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen name="Information" component={Informations} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
